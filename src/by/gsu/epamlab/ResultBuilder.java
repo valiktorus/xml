@@ -2,6 +2,7 @@ package by.gsu.epamlab;
 
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
+import org.xml.sax.helpers.XMLReaderFactory;
 
 import java.io.IOException;
 import java.util.List;
@@ -13,6 +14,11 @@ public class ResultBuilder {
 
     public ResultBuilder() {
         resultHandler = new ResultHandler();
+        try {
+            reader = XMLReaderFactory.createXMLReader();
+        } catch (SAXException e) {
+            System.err.println("SAX parser error" + e.getMessage());;
+        }
         reader.setContentHandler(resultHandler);
     }
 
